@@ -53,7 +53,7 @@ def eval_genomes(genomes, config):
 
 config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                      neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                     'config-particles-static-start')
+                     'config-particles-static-start.ini')
 
 p = neat.Population(config)
 p.add_reporter(neat.StdOutReporter(True))
