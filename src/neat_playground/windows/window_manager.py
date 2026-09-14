@@ -14,6 +14,13 @@ class WindowManager():
             EWindow.Setup: []
         }
 
+    def window_closed(self, window):
+        for key, value in self.active_windows.items():
+            if key == EWindow.MainMenu:
+                continue
+            if window in value:
+                value.remove(window)
+
     def open_main_menu(self, scenarios):
         if EWindow.MainMenu in self.active_windows:
             raise Exception("Main menu can only be opened once!")
@@ -23,15 +30,15 @@ class WindowManager():
         main_menu.show()
         self.active_windows[EWindow.MainMenu] = main_menu
 
-    def open_setup_window(self, scenario):
+    def open_setup_window(self, button, scenario):
         for setup_window in self.active_windows[EWindow.Setup]:
             if setup_window.scenario == scenario:
-                setup_window.show()
+                setup_window.activateWindow()
                 return
-        self.create_new_setup_window(scenario)
+        self.create_new_setup_window(button, scenario)
 
-    def create_new_setup_window(self, scenario):
-        setup_window = SetupWindow(self, scenario)
+    def create_new_setup_window(self, button, scenario):
+        setup_window = SetupWindow(self, button, scenario)
         setup_window.parentWidget = self.active_windows[EWindow.MainMenu]
         setup_window.show()
         self.active_windows[EWindow.Setup].append(setup_window)

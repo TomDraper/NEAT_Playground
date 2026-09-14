@@ -18,3 +18,9 @@ class MainMenu(QtWidgets.QWidget):
         self.root.addWidget(self.subtitle)
         for button in self.scenario_buttons:
             self.root.addWidget(button)
+
+    def set_button_state(self, scenario, enabled):
+        for button in self.scenario_buttons:
+            if button.scenario == scenario:
+                if enabled:
+                    button.setEnabled(enabled)

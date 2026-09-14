@@ -44,5 +44,14 @@ class MainMenuButton(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def open(self):
-        self.window_manager.open_setup_window(self.scenario)
+        self.window_manager.open_setup_window(self, self.scenario)
         print(f"Trying to open {self.scenario_name} with config {self.selected_config}.")
+
+    def setEnabled(self, enabled):
+        # Redraw config box if enabled == true
+        # To-Do: Expand to a true redraw as we may add or remove configs as well. 
+        if enabled:
+            self.selected_config = self.scenario.active_config
+            self.config_dropdown.setCurrentText(self.selected_config.display_name)
+        self.config_dropdown.setEnabled(enabled)
+        
