@@ -1,7 +1,7 @@
 from pygame import Vector2
 from pygame import draw
 from functools import singledispatchmethod
-import globals
+import neat_playground.old_stuff.globals as globals
 import numpy as np
 
 itterations = 2000

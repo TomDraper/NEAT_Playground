@@ -1,18 +1,16 @@
-import sys
 from PySide6 import QtCore, QtWidgets, QtGui
-from windows.components.main_menu_button import *
-from data.scenario import *
+from neat_playground.windows.components.main_menu_button import MainMenuButton
 
 class MainMenu(QtWidgets.QWidget):
-    def __init__(self, scenarios):
+    def __init__(self, window_manager, scenarios):
         super().__init__()
-
+        self.window_manager = window_manager
         self.title = QtWidgets.QLabel("NEAT Playground", alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         self.subtitle = QtWidgets.QLabel("Scenarios")
 
         self.scenario_buttons = []
         for scenario in scenarios:
-            button = MainMenuButton(scenario.scenario_display_name, scenario.configs_display_names, "Test Description 1")
+            button = MainMenuButton(self.window_manager, scenario)
             self.scenario_buttons.append(button)
 
         self.root = QtWidgets.QVBoxLayout(self)

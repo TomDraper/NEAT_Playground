@@ -2,8 +2,11 @@ import os
 import errno
 from PySide6 import QtWidgets
 import sys
-from data.scenario import *
-from windows.main_menu import *
+
+from neat_playground.data.scenario import Scenario
+from neat_playground.windows.window_manager import WindowManager
+# from neat_playground.windows.main_menu import MainMenu
+# from neat_playground.windows.setup_window import SetupWindow
 
 def get_scenario_directories(scenario_root_directory):
         dirs = []
@@ -19,9 +22,12 @@ def create_scenario_data(scenario_directories):
         try:
             scenarios.append(Scenario(scenario))
         except Exception as e:
-            print(f"Failed to find scenario {scenario}") 
             print(e)
+            print(f"Failed to find scenario {scenario}") 
+            
     return scenarios
+
+
 
 # Get Root Path and Scenario Path - Ensure they are valid.
 root_path = os.path.dirname(__file__)
@@ -37,8 +43,7 @@ scenarios = create_scenario_data(scenario_dirs)
 # Build our application and display the main menu.
 app = QtWidgets.QApplication([])
 
-widget = MainMenu(scenarios)
-widget.resize(800, 600)
-widget.show()
+window_manager = WindowManager(app)
+window_manager.open_main_menu(scenarios)
 
 sys.exit(app.exec())

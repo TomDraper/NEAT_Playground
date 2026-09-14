@@ -1,7 +1,7 @@
 import pygame
-import globals
-from bot import *
-from building import *
+import neat_playground.old_stuff.scripts.travelling_salesman.globals as globals
+from neat_playground.old_stuff.scripts.travelling_salesman.bot import *
+from neat_playground.old_stuff.scripts.travelling_salesman.building import *
 
 from pygame import Vector2
 import random

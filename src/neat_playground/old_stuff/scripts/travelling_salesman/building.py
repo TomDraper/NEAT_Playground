@@ -1,4 +1,4 @@
-import globals
+import neat_playground.old_stuff.scripts.travelling_salesman.globals as globals
 import pygame
 from pygame import draw
 from pygame import Rect
