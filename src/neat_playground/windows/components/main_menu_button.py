@@ -1,34 +1,5 @@
 from PySide6 import QtCore, QtWidgets
 
-class ConfigDropdown(QtWidgets.QPushButton):
-    def __init__(self, configs, parent=None):
-        super().__init__(configs[0], parent)
-
-        self.configs = configs
-        self.selected_config = configs[0]
-
-        self.clicked.connect(self.show_menu)
-
-    def show_menu(self):
-        menu = QtWidgets.QMenu(self)
-
-        for config in self.configs:
-            action = menu.addAction(config)
-            action.setCheckable(True)
-            action.setChecked(config == self.selected_config)
-
-        action = menu.exec(self.mapToGlobal(
-            QtCore.QPoint(0, self.height())
-        ))
-
-        if action:
-            self.selected_config = action.text()
-            self.setText(self.selected_config)
-
-            print(
-                f"Selected config: {self.selected_config}"
-            )
-
 class MainMenuButton(QtWidgets.QWidget):
     def __init__ (self, scenario_name, configs, description):
         super().__init__()
@@ -41,11 +12,9 @@ class MainMenuButton(QtWidgets.QWidget):
 
         self.title = QtWidgets.QLabel(self.scenario_name)
 
-        self.config_dropdown = ConfigDropdown(self.configs)
-
-        # QtWidgets.QComboBox()
-        # self.config_dropdown.addItems(self.configs)
-        # self.config_dropdown.activated.connect(self.config_changed)
+        self.config_dropdown = QtWidgets.QComboBox()
+        self.config_dropdown.addItems(self.configs)
+        self.config_dropdown.activated.connect(self.config_changed)
 
         self.open_button = QtWidgets.QPushButton("Open")
         self.open_button.clicked.connect(self.open)
@@ -58,7 +27,6 @@ class MainMenuButton(QtWidgets.QWidget):
     def config_changed(self, index):
         self.selected_config = self.configs[index]
         print(f"Index changed to {index} -- {self.selected_config}")
-        #QtCore.QTimer.singleShot(0, self.config_dropdown.hidePopup)
 
     @QtCore.Slot()
     def open(self):

@@ -1,7 +1,44 @@
-import PySide6.QtCore
+import os
+import errno
+from PySide6 import QtWidgets
+import sys
+from data.scenario import *
+from windows.main_menu import *
 
-# Prints PySide6 version
-print(PySide6.__version__)
+def get_scenario_directories(scenario_root_directory):
+        dirs = []
+        for f in os.listdir(scenario_root_directory):
+            dir_path = os.path.join(scenario_root_directory, f)
+            if os.path.isdir(dir_path):
+                dirs.append(dir_path)
+        return dirs
 
-# Prints the Qt version used to compile PySide6
-print(PySide6.QtCore.__version__)
+def create_scenario_data(scenario_directories):
+    scenarios = []
+    for scenario in scenario_directories:
+        try:
+            scenarios.append(Scenario(scenario))
+        except Exception as e:
+            print(f"Failed to find scenario {scenario}") 
+            print(e)
+    return scenarios
+
+# Get Root Path and Scenario Path - Ensure they are valid.
+root_path = os.path.dirname(__file__)
+scenario_root_dir = os.path.join(root_path, "scenarios")
+
+if os.path.exists(scenario_root_dir) == False:
+    raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), scenario_root_dir)
+
+# Retrieve the scenarios from the scenario directory.
+scenario_dirs = get_scenario_directories(scenario_root_dir)
+scenarios = create_scenario_data(scenario_dirs)
+
+# Build our application and display the main menu.
+app = QtWidgets.QApplication([])
+
+widget = MainMenu(scenarios)
+widget.resize(800, 600)
+widget.show()
+
+sys.exit(app.exec())

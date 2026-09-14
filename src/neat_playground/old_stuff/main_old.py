@@ -1,8 +1,8 @@
 # Example file showing a circle moving on screen
 import pygame
-import globals
-from scripts.particle import *
-from scripts.mouse_tracker import *
+import neat_playground.old_stuff.globals as globals
+from neat_playground.old_stuff.scripts.particle import *
+from neat_playground.old_stuff.scripts.mouse_tracker import *
 import neat
 
 # pygame setup
