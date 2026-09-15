@@ -9,19 +9,24 @@ class SetupWindow(QtWidgets.QWidget):
         self.opening_button.setEnabled(False)
         self.scenario = scenario
 
-
+        self.root = QtWidgets.QVBoxLayout(self)
         self.title = QtWidgets.QLabel(self.scenario.scenario_name.display_name, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         self.active_config = QtWidgets.QLabel("Active Config: " + self.scenario.active_config.display_name)
+        self.run_button = QtWidgets.QPushButton("Run");
+        self.run_button.clicked.connect(self.run_button_clicked)
     
-        self.root = QtWidgets.QVBoxLayout(self)
-
         self.root.addWidget(self.title)
         self.root.addWidget(self.active_config)
+        self.root.addWidget(self.run_button)
 
     def closeEvent(self, event):
         self.opening_button.setEnabled(True)
         self.window_manager.window_closed(self)
         super().closeEvent(event)
+
+    def run_button_clicked(self):
+        print("Ran clicked.")
+        self.window_manager.run_scenario(self.scenario)
 
 if __name__ == "__main__":
     import os

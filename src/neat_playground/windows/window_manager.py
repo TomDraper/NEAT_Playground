@@ -8,8 +8,10 @@ class EWindow(Enum):
     Setup = 1
 
 class WindowManager():
-    def __init__(self, app):
+    def __init__(self, app, scenario_manager):
         self.app = app
+        self.scenario_manager = scenario_manager
+
         self.active_windows = {
             EWindow.Setup: []
         }
@@ -43,3 +45,6 @@ class WindowManager():
         setup_window.show()
         self.active_windows[EWindow.Setup].append(setup_window)
         print(f"Opened setup window for {scenario.scenario_name.display_name} with config {scenario.active_config.display_name}")
+
+    def run_scenario(self, scenario):
+        self.scenario_manager.run_scenario(scenario)

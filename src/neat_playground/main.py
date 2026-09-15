@@ -5,6 +5,7 @@ import sys
 
 from neat_playground.data.scenario import Scenario
 from neat_playground.windows.window_manager import WindowManager
+from neat_playground.managers.scenario_runner_manager import ScenarioRunnerManager
 # from neat_playground.windows.main_menu import MainMenu
 # from neat_playground.windows.setup_window import SetupWindow
 
@@ -43,7 +44,9 @@ scenarios = create_scenario_data(scenario_dirs)
 # Build our application and display the main menu.
 app = QtWidgets.QApplication([])
 
-window_manager = WindowManager(app)
+scenario_manager = ScenarioRunnerManager()
+window_manager = WindowManager(app, scenario_manager)
+
 window_manager.open_main_menu(scenarios)
 
 sys.exit(app.exec())
