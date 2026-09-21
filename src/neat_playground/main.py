@@ -6,8 +6,6 @@ import sys
 from neat_playground.data.scenario import Scenario
 from neat_playground.windows.window_manager import WindowManager
 from neat_playground.managers.scenario_runner_manager import ScenarioRunnerManager
-# from neat_playground.windows.main_menu import MainMenu
-# from neat_playground.windows.setup_window import SetupWindow
 
 def get_scenario_directories(scenario_root_directory):
         dirs = []

@@ -1,7 +1,7 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 from neat_playground.data.scenario import Scenario
 
-class SetupWindow(QtWidgets.QWidget):
+class SetupWindow(QtWidgets.QMainWindow):
     def __init__(self, window_manager, button, scenario:Scenario):
         super().__init__()
         self.window_manager = window_manager
@@ -9,7 +9,10 @@ class SetupWindow(QtWidgets.QWidget):
         self.opening_button.setEnabled(False)
         self.scenario = scenario
 
-        self.root = QtWidgets.QVBoxLayout(self)
+        self.central_widget = QtWidgets.QWidget(self)
+        self.root = QtWidgets.QVBoxLayout(self.central_widget)
+        self.setCentralWidget(self.central_widget)
+
         self.title = QtWidgets.QLabel(self.scenario.scenario_name.display_name, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
         self.active_config = QtWidgets.QLabel("Active Config: " + self.scenario.active_config.display_name)
         self.run_button = QtWidgets.QPushButton("Run");
