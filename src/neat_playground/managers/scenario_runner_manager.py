@@ -10,7 +10,7 @@ class ScenarioRunnerManager():
     def run_scenario(self, scenario: Scenario):
         runner_class = self.get_runner_class(scenario)
         full_config_path = Path.joinpath(Path(scenario.config_dir), Path(scenario.active_config.name))
-        runner_class.setup_run_window()
+        #runner_class.setup_run_window()
         return runner_class.run(full_config_path)
 
 

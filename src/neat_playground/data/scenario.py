@@ -1,5 +1,6 @@
 import os
 import errno
+from pathlib import Path
 
 from neat_playground.data.display_name_property import DisplayNameProperty
 
@@ -20,6 +21,9 @@ class Scenario:
 
         self.active_config = DisplayNameProperty("default.ini", "Default")
         self.set_active_config(active_config)
+
+    def get_full_config_path(self):
+        return Path.joinpath(Path(self.config_dir), Path(self.active_config.name))
 
     def _validate_paths(self):
         if os.path.exists(self.root_dir) == False:

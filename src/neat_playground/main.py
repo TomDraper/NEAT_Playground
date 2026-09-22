@@ -4,6 +4,7 @@ from PySide6 import QtWidgets
 import sys
 
 from neat_playground.data.scenario import Scenario
+from neat_playground.windows.manager_holder import ManagerHolder
 from neat_playground.windows.window_manager import WindowManager
 from neat_playground.managers.scenario_runner_manager import ScenarioRunnerManager
 
@@ -42,9 +43,7 @@ scenarios = create_scenario_data(scenario_dirs)
 # Build our application and display the main menu.
 app = QtWidgets.QApplication([])
 
-scenario_manager = ScenarioRunnerManager()
-window_manager = WindowManager(app, scenario_manager)
-
-window_manager.open_main_menu(scenarios)
+manager_holder = ManagerHolder(app)
+manager_holder.window_manager.open_main_menu(scenarios)
 
 sys.exit(app.exec())

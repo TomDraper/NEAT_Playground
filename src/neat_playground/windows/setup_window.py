@@ -28,8 +28,7 @@ class SetupWindow(QtWidgets.QMainWindow):
         super().closeEvent(event)
 
     def run_button_clicked(self):
-        print("Ran clicked.")
-        self.window_manager.run_scenario(self.scenario)
+        self.window_manager.open_run_window(self.scenario)
 
 if __name__ == "__main__":
     import os
