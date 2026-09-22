@@ -9,9 +9,9 @@ def visualize_genome(genome:DefaultGenome, input_node_names, output_node_names):
     pass
 
 if __name__ == "__main__":
-    from neat_playground.managers.scenario_runner_manager import ScenarioRunnerManager
+    from neat_playground.managers.scenario_manager import ScenarioManager
     from neat_playground.data.scenario import Scenario
-    manager = ScenarioRunnerManager()
+    manager = ScenarioManager()
     test_scenario = Scenario("src/neat_playground/scenarios/test_scenario")
     winner, winner_net = manager.run_scenario(test_scenario)
     #print("WINNER: \n", winner)

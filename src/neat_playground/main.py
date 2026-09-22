@@ -6,7 +6,7 @@ import sys
 from neat_playground.data.scenario import Scenario
 from neat_playground.windows.manager_holder import ManagerHolder
 from neat_playground.windows.window_manager import WindowManager
-from neat_playground.managers.scenario_runner_manager import ScenarioRunnerManager
+from neat_playground.managers.scenario_manager import ScenarioManager
 
 def get_scenario_directories(scenario_root_directory):
         dirs = []
@@ -26,7 +26,6 @@ def create_scenario_data(scenario_directories):
             print(f"Failed to find scenario {scenario}") 
             
     return scenarios
-
 
 
 # Get Root Path and Scenario Path - Ensure they are valid.

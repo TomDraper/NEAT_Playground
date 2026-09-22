@@ -3,16 +3,9 @@ from pathlib import Path
 
 from neat_playground.data.scenario import Scenario
 
-class ScenarioRunnerManager():
+class ScenarioManager():
     def __init__(self):
         pass
-
-    def run_scenario(self, scenario: Scenario):
-        runner_class = self.get_runner_class(scenario)
-        full_config_path = Path.joinpath(Path(scenario.config_dir), Path(scenario.active_config.name))
-        #runner_class.setup_run_window()
-        return runner_class.run(full_config_path)
-
 
     def get_runner_class(self, scenario: Scenario):
         path = Path(scenario.main_file_path)
@@ -29,6 +22,6 @@ class ScenarioRunnerManager():
 
 
 if __name__ == "__main__":
-    manager = ScenarioRunnerManager()
+    manager = ScenarioManager()
     test_scenario = Scenario("src/neat_playground/scenarios/test_scenario")
     manager.run_scenario(test_scenario)
